@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP32 Data Display</title>
+  <style>
+    /* CSS styles here */
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .data-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .data-container div {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ESP32 Data Display</h1>
+    <div class="data-container">
+      <div id="voltage">Voltage: </div>
+      <div id="current">Current: </div>
+      <div id="energy">Energy: </div>
+      <img src="https://i.pinimg.com/736x/f1/02/f7/f102f70b5959e4c31240147b8a4ef696.jpg" alt="ESP32 Image">
+    </div>
+  </div>
+  <script>
+    // JavaScript code here
+    window.onload = function() {
+      fetch('/data')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('voltage').innerText = 'Voltage: ' + data.voltage + ' V';
+          document.getElementById('current').innerText = 'Current: ' + data.current + ' A';
+          document.getElementById('energy').innerText = 'Energy: ' + data.energy + ' kWh';
+        })
+        .catch(error => console.error('Error:', error));
+    };
+  </script>
+</body>
+</html>
