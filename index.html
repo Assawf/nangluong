@@ -16,7 +16,7 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     var data = xhr.responseText;
-                    document.getElementById('data-container').innerText = `Temperature: ${data.temperature} °C`;
+                    document.getElementById('data-container').innerText = `Temperature: ${data} °C`;
                 }
             };
             xhr.send();
