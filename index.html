@@ -12,7 +12,7 @@
     <script>
         function fetchData() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/nangluong/data', true);
+            xhr.open('GET', 'https://web-production-8408a.up.railway.app/api/v1/nangluong', true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     var data = JSON.parse(xhr.responseText);
