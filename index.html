@@ -15,14 +15,29 @@
             xhr.open('GET', 'https://web-production-8408a.up.railway.app/api/v1/nangluong', true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    var data = xhr.responseText;
-                    document.getElementById('data-container').innerText = `Temperature: ${data} °C`;
+                    var data = JSON.parse(xhr.responseText);
+                    let container = document.getElementById('data-container');
+
+                    // Clear all child elements of 'data-container'
+                    container.innerHTML = '';
+                    
+                    // Loop through each property in the object 'a'
+                    for (let key in data) {
+                      // Create a new paragraph element
+                      let newElement = document.createElement('p');
+                    
+                      // Set the text content of the new paragraph element
+                      newElement.textContent = `Temperature: ${a[key]} °C`;
+                    
+                      // Append the new paragraph element to 'data-container'
+                      container.appendChild(newElement);
+                    }
                 }
             };
             xhr.send();
         }
 
-        setInterval(fetchData, 5000); // Lấy dữ liệu mỗi 5 giây
+        setInterval(fetchData, 2000); // Lấy dữ liệu mỗi 5 giây
         fetchData(); // Lấy dữ liệu ban đầu
     </script>
 </body>
