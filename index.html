@@ -17,29 +17,19 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     var data = JSON.parse(xhr.responseText);
-                    let container = document.getElementById('data-container');
-
-                    Clear all child elements of 'data-container'
+                    let container = document.getElementById('data-container');       
                     container.innerHTML = '';
-                    
-                    Loop through each property in the object 'a'
-                    for (let key in data) {
-                      Create a new paragraph element
-                      let newElement = document.createElement('p');
-                    
-                      Set the text content of the new paragraph element
-                     newElement.textContent = `Temperature ${key}: ${data[key]} °C`;
-                    
-                      Append the new paragraph element to 'data-container'
+                    for (let key in data) {               
+                      let newElement = document.createElement('p');                
+                     newElement.textContent = `Temperature ${key}: ${data[key]} °C`;                    
                      container.appendChild(newElement);
                     }
                 }
             };
             xhr.send();
         }
-
-        setInterval(fetchData, 500); // Lấy dữ liệu mỗi 5 giây
-        fetchData(); // Lấy dữ liệu ban đầu
+        setInterval(fetchData, 500); 
+        fetchData(); 
     </script>
 </body>
 </html>
