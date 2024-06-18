@@ -8,81 +8,81 @@
 </head>
 <body>
     <h1>ESP32 Data Monitoring</h1>
-    <div id="meters-container" class="indicator">
+    <div id="data-container" class="indicator">
     <!-- Các phần tử cho đồng hồ sẽ được tạo động ở đây -->
 </div>
 
 
     <script>
-        // function fetchData() {
-        //     var xhr = new XMLHttpRequest();
-        //     xhr.open('GET', 'https://nangluongdemo.up.railway.app/api/v1/nangluong', true);
-        //     xhr.onreadystatechange = function() {
-        //         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-        //             var data = JSON.parse(xhr.responseText);
-        //             let container = document.getElementById('data-container');
+        function fetchData() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://web-production-8408a.up.railway.app/api/v1/nangluong', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    let container = document.getElementById('data-container');
 
-        //             // Clear all child elements of 'data-container'
-        //             //container.innerHTML = '';
+                    Clear all child elements of 'data-container'
+                    container.innerHTML = '';
                     
-        //             // Loop through each property in the object 'a'
-        //             //for (let key in data) {
-        //               // Create a new paragraph element
-        //               //let newElement = document.createElement('p');
+                    Loop through each property in the object 'a'
+                    for (let key in data) {
+                      Create a new paragraph element
+                      let newElement = document.createElement('p');
                     
-        //               // Set the text content of the new paragraph element
-        //              // newElement.textContent = `Temperature ${key}: ${data[key]} °C`;
+                      Set the text content of the new paragraph element
+                     newElement.textContent = `Temperature ${key}: ${data[key]} °C`;
                     
-        //               // Append the new paragraph element to 'data-container'
-        //              // container.appendChild(newElement);
-        //             //}
-        //         }
-        //     };
-        //     xhr.send();
-        // }
-
-        // setInterval(fetchData, 2000); // Lấy dữ liệu mỗi 5 giây
-        // fetchData(); // Lấy dữ liệu ban đầu
-        function createMeterElements(meterCount) {
-                let metersContainer = document.getElementById('meters-container');
-                metersContainer.innerHTML = ''; // Xóa các phần tử hiện tại
-            
-                for (let i = 1; i <= meterCount; i++) {
-                    let meterContainer = document.createElement('div');
-                    meterContainer.id = `meter${i}-container`;
-                    meterContainer.innerHTML = `
-                        <h3>Đồng Hồ Điện ${i}</h3>
-                        <p id="temperature${i}">Nhiệt độ: -- °C</p>
-                        <p id="current${i}">Dòng điện: -- A</p>
-                        <p id="voltage${i}">Điện áp: -- V</p>
-                        <p id="power${i}">Công suất: -- W</p>
-                    `;
-                    metersContainer.appendChild(meterContainer);
-                }
-            }
-            
-            function fetchData() {
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'https://nangluongdemo.up.railway.app/api/v1/nangluong', true);
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                        var data = JSON.parse(xhr.responseText);
-                        
-                        for (let i = 1; i <= Object.keys(data).length; i++) {
-                            // Cập nhật thông tin cho từng đồng hồ
-                            document.getElementById(`temperature${i}`).textContent = `Nhiệt độ: ${data[`meter${i}`].temperature} °C`;
-                            document.getElementById(`current${i}`).textContent = `Dòng điện: ${data[`meter${i}`].current} A`;
-                            document.getElementById(`voltage${i}`).textContent = `Điện áp: ${data[`meter${i}`].voltage} V`;
-                            document.getElementById(`power${i}`).textContent = `Công suất: ${data[`meter${i}`].power} KWh`;
-                        }
+                      Append the new paragraph element to 'data-container'
+                     container.appendChild(newElement);
                     }
-                };
-                xhr.send();
-            }
+                }
+            };
+            xhr.send();
+        }
+
+        setInterval(fetchData, 2000); // Lấy dữ liệu mỗi 5 giây
+        fetchData(); // Lấy dữ liệu ban đầu
+        // function createMeterElements(meterCount) {
+        //         let metersContainer = document.getElementById('meters-container');
+        //         metersContainer.innerHTML = ''; // Xóa các phần tử hiện tại
             
-            createMeterElements(2); 
-            setInterval(fetchData, 500); 
-            fetchData(); 
+        //         for (let i = 1; i <= meterCount; i++) {
+        //             let meterContainer = document.createElement('div');
+        //             meterContainer.id = `meter${i}-container`;
+        //             meterContainer.innerHTML = `
+        //                 <h3>Đồng Hồ Điện ${i}</h3>
+        //                 <p id="temperature${i}">Nhiệt độ: -- °C</p>
+        //                 <p id="current${i}">Dòng điện: -- A</p>
+        //                 <p id="voltage${i}">Điện áp: -- V</p>
+        //                 <p id="power${i}">Công suất: -- W</p>
+        //             `;
+        //             metersContainer.appendChild(meterContainer);
+        //         }
+        //     }
+            
+        //     function fetchData() {
+        //         var xhr = new XMLHttpRequest();
+        //         xhr.open('GET', 'https://nangluongdemo.up.railway.app/api/v1/nangluong', true);
+        //         xhr.onreadystatechange = function() {
+        //             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        //                 var data = JSON.parse(xhr.responseText);
+                        
+        //                 for (let i = 1; i <= Object.keys(data).length; i++) {
+        //                     // Cập nhật thông tin cho từng đồng hồ
+        //                     document.getElementById(`temperature${i}`).textContent = `Nhiệt độ: ${data[`meter${i}`].temperature} °C`;
+        //                     document.getElementById(`current${i}`).textContent = `Dòng điện: ${data[`meter${i}`].current} A`;
+        //                     document.getElementById(`voltage${i}`).textContent = `Điện áp: ${data[`meter${i}`].voltage} V`;
+        //                     document.getElementById(`power${i}`).textContent = `Công suất: ${data[`meter${i}`].power} KWh`;
+        //                 }
+        //             }
+        //         };
+        //         xhr.send();
+        //     }
+            
+        //     createMeterElements(2); 
+        //     setInterval(fetchData, 500); 
+        //     fetchData(); 
 
     </script>
 </body>
